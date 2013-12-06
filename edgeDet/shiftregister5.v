@@ -85,6 +85,7 @@ module shiftregister #(parameter cols = 640)
    
    
    //Matrix is like this in matrix form:
+   // I think the specs are quite off
    // row1[5]  row1[4]  row1[3]  ->  z8 z7 z6  
    // row2[5]  row2[4]  row2[3]  ->  z5 z4 z3
    // row3[5]  row3[4]  row3[3]  ->  z2 z1 z0

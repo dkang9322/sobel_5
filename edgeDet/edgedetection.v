@@ -36,7 +36,7 @@ module edgedetection(
    wire [7:0] 	  sr_grayout;
    
 
-   // Only change made in 5by5 sobel
+   // Change made in 5by5 sobel
    wire [199:0]   matrixout;
    wire 	   swi = 0;
    wire [7:0] 	   edgeoutputsobel;
@@ -58,12 +58,8 @@ module edgedetection(
    // Sobel Module
    //--------------------------------------------------------------------------------
    wire [7:0] 	   sobel_out;
-   sobel edgedetect(clock,matrixout[71:64],matrixout[63:56],
-		    matrixout[55:48],matrixout[47:40],matrixout[39:32],
-		    matrixout[31:24],matrixout[23:16],matrixout[15:8],
-		    matrixout[7:0],swi,sobel_out);
-
    
+   sobel edgedetect(clock,matrixout,swi,sobel_out);
 
    
    //--------------------------------------------------------------------------------
