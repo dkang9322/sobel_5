@@ -88,7 +88,13 @@ module sobel(clock,matrix_inp,switch,edge_out);
 	//assign edge_out =(sum > 120) ? 0 : 8'hff
 	///assign edge_out =(sum > 120) ? 8'hff : 0
      end // always @ (posedge clock)
+
+   assign edge_out=(sum > 400)?0 : 8'hff;
+
    
-   assign edge_out=(|sum[13:8])?8'hff:sum[7:0];
+   // This currently gives out a bit noisy -> were not sure of calibration
+   // for the threshold for 5by5 sobel filter
+   // Very noisy output, not recognizable
+   //assign edge_out=(|sum[13:8])?0 : 8'hff;
    
 endmodule
