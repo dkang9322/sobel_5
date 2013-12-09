@@ -569,7 +569,7 @@ module zbt_6111_sample(beep, audio_reset_b,
 
    edgProc edgPixToZBT1(reset, clk, hcount, vcount, zbt0_two_pixels,
 			zbt1_write_addr, zbt1_edge_pixels,
-			zbt1_edge_addr, switch[4], switch[7], zbt1_edge_sel);
+			zbt1_edge_addr, switch[4], switch[6], zbt1_edge_sel);
    
 
    //--------------------------------------------------------------------------------
