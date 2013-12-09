@@ -20,7 +20,8 @@
 //
 // switch [1:0] is used for the color reduction selection, if switch[1:0]=2'd3, then we have fuse mode
 // switch [7:5] is used for the color reduction value
-// switch [7] is used for switching between sobel_3, sobel_5 (switchvalue 0, 1 respectively) when
+// switch [7] is used for switching between sobel_3, sobel_5 (switchvalue 0, 1 respectively) when displaying edgOutput
+// switch [7] is used for switching between bright_RGB, unfiltered RGB (switchval 1, 0, respectively) when disp colReduce output
 // switch [4] is used for switching between color, edge (only when switch[1:0] < 3)
 // (if switch[4]=1 -> display color, otherwise edge)
 //
@@ -575,7 +576,7 @@ module zbt_6111_sample(beep, audio_reset_b,
    // Color Reduction Module
    //--------------------------------------------------------------------------------
    
-   /*
+
     wire [35:0] zbt1_colr_pixels;
     wire [18:0] zbt1_colr_addr;
     
@@ -584,9 +585,10 @@ module zbt_6111_sample(beep, audio_reset_b,
 			 zbt1_colr_addr,
 			 switch[7:5],
 			 switch[1:0],
-			 col_change); //col(or)_change is button3, debounced
+			 col_change,
+			 switch[7]); //col(or)_change is button3, debounced
 
-    */
+
 
    /* 
     --------------------------------------------------------------------------------
@@ -602,10 +604,10 @@ module zbt_6111_sample(beep, audio_reset_b,
     --------------------------------------------------------------------------------
     */
    /* Below is for edgeDetection Only */
-
+   /*
    wire [35:0] 	zbt1_proc_pixels = zbt1_edge_pixels;
    wire [18:0] 	zbt1_dwrite_addr = zbt1_edge_addr;
-
+    */
 
 
    /* Duplex Mode */
@@ -614,7 +616,7 @@ module zbt_6111_sample(beep, audio_reset_b,
     */
 
    /* Image Fusion*/
-   /*
+
     // Hacky Image Fuser
     // Note Display output is the inverse of writing output
     // For writing, we need to invert zbt1_edge_pixels
@@ -622,7 +624,7 @@ module zbt_6111_sample(beep, audio_reset_b,
 
     wire [35:0] 	zbt1_proc_pixels = (switch[0]&switch[1]) ? zbt1_fuse_pixels : (switch[4] ? zbt1_colr_pixels : zbt1_edge_pixels);
     wire [18:0] 	zbt1_dwrite_addr = zbt1_colr_addr;
-    */
+
    
    /* Storing Processed Pixel Value to ZBT bank 1 */
    assign vram_addr1 = my_we1 ? zbt1_dwrite_addr : vram_vga_addr;

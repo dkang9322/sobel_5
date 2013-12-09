@@ -6,7 +6,8 @@ module colProc(reset, clk,
 	       proc_pix_addr,
 	       switch_vals, // switches to choose num_shifts
 	       switch_sels, // switches to choose HSV
-	       change //Button to re-write color
+	       change, //Button to re-write color
+	       brighter // switch to output brighter RGB
 	       );
    input reset, clk;
    input [10:0] hcount;
@@ -19,6 +20,8 @@ module colProc(reset, clk,
    input [2:0] 	 switch_vals;
    input [1:0] 	 switch_sels;
    input 	 change;
+   input 	 brighter;
+   
    
    
    // Two Outputs of this module
@@ -31,8 +34,9 @@ module colProc(reset, clk,
 
 
    colWrapper col_abstr(reset, clk, two_pixel_vals,
-		       two_undel_proc_pixs,
-		       switch_vals, switch_sels, change);
+			two_undel_proc_pixs,
+			switch_vals, switch_sels, change,
+			brighter);
 
 
    //forecast hcount & vcount 8 clock cycles ahead
