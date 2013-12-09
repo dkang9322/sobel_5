@@ -40,9 +40,11 @@ module contrastBrightness(
    assign tR = tRGB[23:16];
    assign tG = tRGB[15:8];
    assign tB = tRGB[7:0];
-   
-   wire [7:0] 	  contrast 		= 8'd5;
-   wire [7:0] 	  brightness 	= 8'd32;
+
+   // with (contrast, brightness) = (5, 32) got decent results
+   // Now trying with (6, 16)
+   wire [7:0] 	  contrast 		= 8'd6;
+   wire [7:0] 	  brightness 	= 8'd16;
    
    always @(posedge clk) begin
       uptRtest <= (tR*contrast)/4 + brightness;
