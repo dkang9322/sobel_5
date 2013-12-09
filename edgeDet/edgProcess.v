@@ -5,6 +5,7 @@ module edgProc(reset, clk,
 	       two_proc_pixs, // Processed Pixel
 	       proc_pix_addr,
 	       gs_switch,
+	       so_switch, //sobel switch
 	       edg_sel
 	       );
    input reset, clk;
@@ -15,6 +16,8 @@ module edgProc(reset, clk,
    output [35:0] two_proc_pixs;
    output [18:0] proc_pix_addr;
    input 	 gs_switch; //switch[4], true if we want grayscale
+   input 	 so_switch; //switch[7], true if we want sobel5_5
+   
    output 	 edg_sel; //Sobel Operator edgeSelect Output
    
    
@@ -26,7 +29,7 @@ module edgProc(reset, clk,
 
 
    edgWrapper edg_abstr(reset, clk, two_pixel_vals,
-			two_proc_pixs, hcount, gs_switch,
+			two_proc_pixs, hcount, gs_switch,so_switch,
 			edg_sel);
    
    //forecast hcount & vcount 8 clock cycles ahead

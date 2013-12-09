@@ -20,6 +20,7 @@
 //
 // switch [1:0] is used for the color reduction selection, if switch[1:0]=2'd3, then we have fuse mode
 // switch [7:5] is used for the color reduction value
+// switch [7] is used for switching between sobel_3, sobel_5 (switchvalue 0, 1 respectively) when
 // switch [4] is used for switching between color, edge (only when switch[1:0] < 3)
 // (if switch[4]=1 -> display color, otherwise edge)
 //
@@ -567,7 +568,7 @@ module zbt_6111_sample(beep, audio_reset_b,
 
    edgProc edgPixToZBT1(reset, clk, hcount, vcount, zbt0_two_pixels,
 			zbt1_write_addr, zbt1_edge_pixels,
-			zbt1_edge_addr, switch[4], zbt1_edge_sel);
+			zbt1_edge_addr, switch[4], switch[7], zbt1_edge_sel);
    
 
    //--------------------------------------------------------------------------------

@@ -27,7 +27,8 @@ module edgedetection(
 		     input [10:0]  hcount,
 		     output [23:0] edgeoutputsel,
 		     output 	   select,
-		     input grayscale
+		     input grayscale,
+		     input sobel_5
 		     );
 
    // Intermediate grayscale outputs that will be multiplexed
@@ -38,7 +39,7 @@ module edgedetection(
 
    // Change made in 5by5 sobel
    wire [199:0]   matrixout;
-   wire 	   swi = 1; // Sobel 5x5 
+   wire 	   swi = 1; // Sobel 5x5 , unused
    wire [7:0] 	   edgeoutputsobel;
 
 
@@ -89,8 +90,8 @@ module edgedetection(
    //assign  edgeoutputsel = grayscale ? {shifted_gs, shifted_gs, shifted_gs} :~sobel_rgb;
 
    // Current code for switching between sobel_3 and sobel_5
-   assign  edgeoutputsel = grayscale ? ~sobel_rgb: ~sobel3_rgb;
-   assign select = grayscale ? select_5 : select_3;
+   assign  edgeoutputsel = grayscale ? {shifted_gs, shifted_gs, shifted_gs}: (sobel_5 ? ~sobel_rgb: ~sobel3_rgb);
+   assign select = sobel_5 ? select_5 : select_3;
    
    // To be visually pleasant, let's display the inversion of actual
    

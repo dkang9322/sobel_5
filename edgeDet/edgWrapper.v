@@ -3,6 +3,7 @@ module edgWrapper(reset, clk,
 		  two_proc_pixs,
 		  hcount,
 		  gs_switch,
+		  so_switch,
 		  edg_sel
 		  );
    /*
@@ -16,6 +17,8 @@ module edgWrapper(reset, clk,
 
    input [10:0]  hcount;
    input 	 gs_switch; //True if we want to display grayscale data
+   input 	 so_switch;//True if we want 5by5 sobel output
+   
    output 	 edg_sel; //Edge Selector
    
    //Input to edgedetection
@@ -40,7 +43,7 @@ module edgWrapper(reset, clk,
     All sort of image defragmentation happened
    */
    edgedetection edgDetect(reset, clk, pix1RGB, pix2RGB, hcount,
-			   edgRGB, edg_sel, gs_switch);
+			   edgRGB, edg_sel, gs_switch, so_switch);
 
    
    /* All under the assumption that we get an edge output
