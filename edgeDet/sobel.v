@@ -28,8 +28,9 @@ module sobel(clock,matrix_inp,switch,edge_out);
 
    input clock;
    input [IND:0] matrix_inp;
+
    
-   input       switch;
+   input       switch; // Switch is unused
    output [7:0] edge_out;
 
    wire [7:0] 	z0,z1,z2,z3,z4,z5,z6,z7,z8,z9,z10,z11,z12,z13,z14,z15,z16,z17,z18,z19,z20,z21,z22,z23,z24;
@@ -71,6 +72,7 @@ module sobel(clock,matrix_inp,switch,edge_out);
 
    
    reg [13:0] 	     sum; 
+
    
    always @ (posedge clock)
      begin
@@ -87,9 +89,14 @@ module sobel(clock,matrix_inp,switch,edge_out);
 	//Threshold-
 	//assign edge_out =(sum > 120) ? 0 : 8'hff
 	///assign edge_out =(sum > 120) ? 8'hff : 0
+
+
      end // always @ (posedge clock)
 
-   assign edge_out=(sum > 400)?0 : 8'hff;
+   assign edge_out=(sum > 800)?0 : 8'hff;
+   
+   // Still very noisy, will increase to 800
+   //assign edge_out=(sum > 400)?0 : 8'hff;
 
    
    // This currently gives out a bit noisy -> were not sure of calibration
