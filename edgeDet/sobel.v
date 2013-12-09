@@ -93,7 +93,10 @@ module sobel(clock,matrix_inp,switch,edge_out);
 
      end // always @ (posedge clock)
 
-   assign edge_out=(sum > 1000)?0 : 8'hff;
+   assign edge_out=(sum > 1200)?0 : 8'hff;
+   
+   // Below Gave too strong of a noise
+   //assign edge_out=(sum > 1000)?0 : 8'hff;
    
    // Still very noisy, will increase to 800
    //assign edge_out=(sum > 400)?0 : 8'hff;

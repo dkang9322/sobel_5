@@ -45,7 +45,7 @@ module sobel_3(clock,z0,z1,z2,z3,z4,z5,z6,z7,z8,switch,edge_out);
 
      end // always @ (posedge clock)
 
-   assign edge_out =(sum > 320) ? 0 : 8'hff;
+   assign edge_out =(sum > 240) ? 0 : 8'hff;
    
    // Below gives us a really nice outline, the best seen so far
    //assign edge_out =(sum > 280) ? 0 : 8'hff;
