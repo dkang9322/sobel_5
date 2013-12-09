@@ -75,10 +75,23 @@ module edgedetection(
    // SelectBit Generation
    //--------------------------------------------------------------------------------
    wire [23:0] 	   sobel_rgb;
+   wire 	   select_5;
    
-   selectbit selector(clock, sobel_out, sobel_rgb, select);
+   wire [23:0] 	   sobel3_rgb;
+   wire 	   select_3;
+   
+   
+   
+   selectbit selector(clock, sobel_out, sobel_rgb, select_5);
+   selectbit selector_3(clock, sobel3_out, sobel3_rgb, select_3);
 
-   assign  edgeoutputsel = grayscale ? {shifted_gs, shifted_gs, shifted_gs} :~sobel_rgb;
+   // Below Code is for switching between gs, and edgeOut
+   //assign  edgeoutputsel = grayscale ? {shifted_gs, shifted_gs, shifted_gs} :~sobel_rgb;
+
+   // Current code for switching between sobel_3 and sobel_5
+   assign  edgeoutputsel = grayscale ? ~sobel_rgb: ~sobel3_rgb;
+   assign select = grayscale ? select_5 : select_3;
+   
    // To be visually pleasant, let's display the inversion of actual
    
 
