@@ -41,7 +41,7 @@ module contrastBrightness(
    assign tG = tRGB[15:8];
    assign tB = tRGB[7:0];
    
-   wire [7:0] 	  contrast 		= 8'd4;
+   wire [7:0] 	  contrast 		= 8'd5;
    wire [7:0] 	  brightness 	= 8'd32;
    
    always @(posedge clk) begin
@@ -51,8 +51,8 @@ module contrastBrightness(
    end
    
    assign uptR = (uptRtest>255)?8'd255:uptRtest;
-   assign uptG = (uptGtest>255)?8'd255:uptRtest;
-   assign uptB = (uptBtest>255)?8'd255:uptRtest;
+   assign uptG = (uptGtest>255)?8'd255:uptGtest;
+   assign uptB = (uptBtest>255)?8'd255:uptBtest;
    
    assign uptRGB = {uptR,uptG,uptB};
 
